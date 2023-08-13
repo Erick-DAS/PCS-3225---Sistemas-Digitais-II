@@ -41,6 +41,7 @@ component ShiftRegister4Bits is
           clear       : in bit;
           parallel_load          : in bit;
           parallel_entry          : in bit_vector(3 downto 0);
+          enable_shift : in bit;
           serial_entry : in bit;
           reg_value  : out bit_vector(3 downto 0));
     
@@ -90,7 +91,7 @@ begin
 
     adder: Adder4Bits port map (added_parcel, Reg_Vresult(7 downto 4), add_cout, add_result);
 
-    Va_shifter: ShiftRegister4Bits port map (clock, '0', PL_Va, Va, Reg_Va(0), Reg_Va);
+    Va_shifter: ShiftRegister4Bits port map (clock, '0', PL_Va, Va, calculate, Reg_Va(0), Reg_Va);
     Vb_register: Register4Bits port map (clock, '0', PL_Vb, Vb, Reg_Vb);
     result_shifter: ShiftRegister8Bits port map (clock, result_and_count_clear, PL_Vresult, Vresult_shifter_entry, add_cout, Reg_Vresult);
         

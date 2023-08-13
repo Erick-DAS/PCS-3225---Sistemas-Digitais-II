@@ -1,31 +1,31 @@
 v 4
-file . "4bitRegister.vhd" "3e0276eaae4b36612766f2c39618912199b113bb" "20230813004121.334":
-  entity register4bits at 1( 0) + 0 on 33;
-  architecture register4bits_arch of register4bits at 13( 289) + 0 on 34;
-file . "mult_UC.vhd" "9d2b7e49280ecdc24a59cbdd2152d08df0d66850" "20230813005518.580":
-  entity unidadedecontrole at 1( 0) + 0 on 41;
-  architecture uc_arch of unidadedecontrole at 23( 484) + 0 on 42;
-file . "DFlipFlop.vhd" "ee31f3413f28609eb25f5d282ffaf4b3a355b75a" "20230813003737.743":
-  entity flipflopd at 1( 0) + 0 on 25;
-  architecture flipflopd_arch of flipflopd at 10( 172) + 0 on 26;
-file . "4bitShiftRegister.vhd" "bbc2bc731fc0a7ed987fb325bb5ebb171218dcce" "20230813003713.733":
-  entity shiftregister4bits at 1( 0) + 0 on 21;
-  architecture shiftregister4bits_arch of shiftregister4bits at 16( 410) + 3 on 22;
-file . "ssm_tb.vhd" "1ba2a886a76adb86fdb23f5a36f2828370814951" "20230813005930.030":
-  entity multiplicador_tb at 8( 267) + 0 on 43;
-  architecture tb of multiplicador_tb at 14( 354) + 0 on 44;
-file . "sum_shift_multiplier.vhd" "2f9fbd1b8253035cf67657ef2d4af749c01229af" "20230813011641.215":
-  entity multiplicador_modificado at 1( 0) + 0 on 47;
-  architecture mm_arch of multiplicador_modificado at 15( 305) + 0 on 48;
-file . "3bitCounter.vhd" "66ab50649c66076a5a51092b2498b988851ef9e7" "20230813003507.319":
-  entity counter3bits at 1( 0) + 0 on 17;
-  architecture counter3bits_arch of counter3bits at 15( 357) + 0 on 18;
-file . "4bitAdder.vhd" "e0543399046e3943b6d71d031fa310fe97ead2d2" "20230813003547.232":
-  entity adder4bits at 1( 0) + 0 on 19;
-  architecture adder4bits_arch of adder4bits at 11( 243) + 0 on 20;
-file . "8bitShiftRegister.vhd" "29be2a8b723772cc0d096d7f5cccd644e64ce4ad" "20230813003728.973":
-  entity shiftregister8bits at 1( 0) + 0 on 23;
-  architecture shiftregister8bits_arch of shiftregister8bits at 16( 415) + 3 on 24;
-file . "mult_FD.vhd" "34e440c52da8b8c850ceddb977937176ce3da4fd" "20230813011939.734":
-  entity fluxodedados at 1( 0) + 0 on 49;
-  architecture fd_arch of fluxodedados at 22( 510) + 0 on 50;
+file . "mult_FD.vhd" "06d3187538be2a906388f5e500afb3066ed3cdc7" "20230813023218.074":
+  entity fluxodedados at 1( 0) + 0 on 83;
+  architecture fd_arch of fluxodedados at 22( 489) + 0 on 84;
+file . "8bitShiftRegister.vhd" "b100369fd4b803b99176174c03f37d1c5316e268" "20230813023029.523":
+  entity shiftregister8bits at 1( 0) + 0 on 79;
+  architecture shiftregister8bits_arch of shiftregister8bits at 16( 400) + 3 on 80;
+file . "4bitAdder.vhd" "25dca8b7cd9212ee792d134e1a0ae9c0f48dea55" "20230813021641.588":
+  entity adder4bits at 1( 0) + 0 on 61;
+  architecture adder4bits_arch of adder4bits at 12( 218) + 0 on 62;
+file . "3bitCounter.vhd" "7fb37b3098baefd9007f144a311921410fc5f46d" "20230813021636.161":
+  entity counter3bits at 1( 0) + 0 on 59;
+  architecture counter3bits_arch of counter3bits at 15( 343) + 0 on 60;
+file . "sum_shift_multiplier.vhd" "dcd2b71c0c99b85262d1d1ab3f764a9483dff59d" "20230813021728.565":
+  entity multiplicador_modificado at 1( 0) + 0 on 73;
+  architecture mm_arch of multiplicador_modificado at 15( 291) + 0 on 74;
+file . "ssm_tb.vhd" "5e8e97fe709de4242d0a8a22a76624b88d67e9d1" "20230813021724.054":
+  entity multiplicador_tb at 8( 260) + 0 on 71;
+  architecture tb of multiplicador_tb at 14( 341) + 0 on 72;
+file . "4bitShiftRegister.vhd" "39601e21106248cdf8bbe04a2760f2fff8b0c174" "20230813023211.621":
+  entity shiftregister4bits at 1( 0) + 0 on 81;
+  architecture shiftregister4bits_arch of shiftregister4bits at 17( 428) + 3 on 82;
+file . "DFlipFlop.vhd" "9c79e36b166517090a475903537657fa4649509e" "20230813021704.660":
+  entity flipflopd at 1( 0) + 0 on 69;
+  architecture flipflopd_arch of flipflopd at 10( 163) + 0 on 70;
+file . "mult_UC.vhd" "e0974256f3396033ebac3f9d4ed031ab09e48c7a" "20230813021751.486":
+  entity unidadedecontrole at 1( 0) + 0 on 77;
+  architecture uc_arch of unidadedecontrole at 23( 462) + 0 on 78;
+file . "4bitRegister.vhd" "7739b9a5e4bc5dcb85c524b98c75443292417d3b" "20230813021645.880":
+  entity register4bits at 1( 0) + 0 on 63;
+  architecture register4bits_arch of register4bits at 13( 277) + 0 on 64;

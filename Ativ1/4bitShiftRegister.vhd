@@ -8,6 +8,7 @@ entity ShiftRegister4Bits is
           clear       : in bit;
           parallel_load          : in bit;
           parallel_entry          : in bit_vector(3 downto 0);
+          enable_shift : in bit;
           serial_entry : in bit;
           reg_value  : out bit_vector(3 downto 0));
     
@@ -29,11 +30,12 @@ entity ShiftRegister4Bits is
             end if;
         
         elsif (falling_edge(clock)) then
-            current_value(3) <= serial_entry;
-            current_value(2) <= current_value(3);
-            current_value(1) <= current_value(2);
-            current_value(0) <= current_value(1);
-        
+            if (enable_shift = '1') then
+                current_value(3) <= serial_entry;
+                current_value(2) <= current_value(3);
+                current_value(1) <= current_value(2);
+                current_value(0) <= current_value(1);
+            end if;
         end if;
     end process;
   end architecture;
