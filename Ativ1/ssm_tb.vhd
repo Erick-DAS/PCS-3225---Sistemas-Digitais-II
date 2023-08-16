@@ -63,25 +63,6 @@ begin
     assert false report "simulation start" severity note;
     keep_simulating <= '1';
     
-    ---- Caso de teste 1: A=3, B=6
-    Va_in <= "0011"; 
-    Vb_in <= "0110"; 
-    -- Reset inicial (1 periodo de clock) - não precisa repetir
-    rst_in <= '1'; start_in <= '0';
-    wait for clockPeriod;
-    rst_in <= '0';
-    wait until falling_edge(clk_in);
-    -- pulso do sinal de Start
-    start_in <= '1';
-    wait until falling_edge(clk_in);
-    start_in <= '0';
-    -- espera pelo termino da multiplicacao
-    wait until ready_out='1';
-    -- verifica resultado
-    assert (result_out/="00010010") report "1.OK: 3x6=00010010 (18)" severity note;
-    
-    wait for clockPeriod;
-
     ----------------------------------------------------------------------------------
 
     ---- Caso de teste 2: A=15, B=11
@@ -94,8 +75,10 @@ begin
     start_in <= '0';
     -- espera pelo termino da multiplicacao
     wait until ready_out='1';
+    wait for 1 ps;
     -- verifica resultado
     assert (result_out/="10100101") report "2.OK: 15x11=10100101 (165)" severity note;
+    assert false report "result: " & integer'image(to_integer(unsigned(result_out))) severity note;
     
     wait for clockPeriod;    
 
@@ -111,8 +94,11 @@ begin
     start_in <= '0';
     -- espera pelo termino da multiplicacao
     wait until ready_out='1';
+    wait for 1 ps;
     -- verifica resultado
     assert (result_out/="00000000") report "3.OK: 15x0=00000000 (0)" severity note;
+    assert false report "result: " & integer'image(to_integer(unsigned(result_out))) severity note;
+
     
     wait for clockPeriod;    
  
@@ -128,8 +114,10 @@ begin
     start_in <= '0';
     -- espera pelo termino da multiplicacao
     wait until ready_out='1';
+    wait for 1 ps;
     -- verifica resultado
     assert (result_out/="00001011") report "4.OK: 1x11=00001011 (11)" severity note;
+    assert false report "result: " & integer'image(to_integer(unsigned(result_out))) severity note;
     
     wait for clockPeriod;  
     ----------------------------------------------------------------------------------

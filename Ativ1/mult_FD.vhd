@@ -72,7 +72,7 @@ component FlipFlopD is
           Q        : out bit);
 end component;
 
-signal ready_FF_out, change_ready, add_cout, counter_RCO, aux_ready : bit;
+signal ready_FF_out, change_ready, add_cout, counter_RCO, aux_ready, reg_add_cout : bit;
 signal counter_variable : bit_vector(2 downto 0);
 signal Reg_Va, Reg_Vb, added_parcel, add_result : bit_vector(3 downto 0);
 signal Reg_Vresult, Vresult_shifter_entry : bit_vector(7 downto 0); 
@@ -90,9 +90,10 @@ begin
     counter: Counter3Bits port map (clock, result_and_count_clear , '0', "000", enable_count, counter_RCO, counter_variable);
 
     adder: Adder4Bits port map (added_parcel, Reg_Vresult(7 downto 4), add_cout, add_result);
+    Carry_out: FlipFlopD port map (add_cout, clock, reg_add_cout);
 
     Va_shifter: ShiftRegister4Bits port map (clock, '0', PL_Va, Va, calculate, Reg_Va(0), Reg_Va);
     Vb_register: Register4Bits port map (clock, '0', PL_Vb, Vb, Reg_Vb);
-    result_shifter: ShiftRegister8Bits port map (clock, result_and_count_clear, PL_Vresult, Vresult_shifter_entry, add_cout, Reg_Vresult);
+    result_shifter: ShiftRegister8Bits port map (clock, result_and_count_clear, PL_Vresult, Vresult_shifter_entry, reg_add_cout, Reg_Vresult);
         
 end architecture;

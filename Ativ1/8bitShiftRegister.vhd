@@ -23,20 +23,20 @@ entity ShiftRegister8Bits is
         if (clear = '1') then
             current_value <= "00000000";
         
-        elsif (rising_edge(Clock)) then
+        elsif (rising_edge(clock)) then
             if (parallel_load = '1') then
                 current_value <= parallel_entry;
             end if;
         
         elsif (falling_edge(clock)) then
-            current_value(7) <= serial_entry;
-            current_value(6) <= current_value(7);
-            current_value(5) <= current_value(6);
-            current_value(4) <= current_value(5);
-            current_value(3) <= current_value(4);
-            current_value(2) <= current_value(3);
-            current_value(1) <= current_value(2);
             current_value(0) <= current_value(1);
+            current_value(1) <= current_value(2);
+            current_value(2) <= current_value(3);
+            current_value(3) <= current_value(4);
+            current_value(4) <= current_value(5);
+            current_value(5) <= current_value(6);
+            current_value(6) <= current_value(7);
+            current_value(7) <= serial_entry;
         
         end if;
     end process;

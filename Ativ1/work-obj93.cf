@@ -1,31 +1,34 @@
 v 4
-file . "mult_FD.vhd" "06d3187538be2a906388f5e500afb3066ed3cdc7" "20230813023218.074":
-  entity fluxodedados at 1( 0) + 0 on 83;
-  architecture fd_arch of fluxodedados at 22( 489) + 0 on 84;
-file . "8bitShiftRegister.vhd" "b100369fd4b803b99176174c03f37d1c5316e268" "20230813023029.523":
-  entity shiftregister8bits at 1( 0) + 0 on 79;
-  architecture shiftregister8bits_arch of shiftregister8bits at 16( 400) + 3 on 80;
-file . "4bitAdder.vhd" "25dca8b7cd9212ee792d134e1a0ae9c0f48dea55" "20230813021641.588":
-  entity adder4bits at 1( 0) + 0 on 61;
-  architecture adder4bits_arch of adder4bits at 12( 218) + 0 on 62;
-file . "3bitCounter.vhd" "7fb37b3098baefd9007f144a311921410fc5f46d" "20230813021636.161":
-  entity counter3bits at 1( 0) + 0 on 59;
-  architecture counter3bits_arch of counter3bits at 15( 343) + 0 on 60;
-file . "sum_shift_multiplier.vhd" "dcd2b71c0c99b85262d1d1ab3f764a9483dff59d" "20230813021728.565":
-  entity multiplicador_modificado at 1( 0) + 0 on 73;
-  architecture mm_arch of multiplicador_modificado at 15( 291) + 0 on 74;
-file . "ssm_tb.vhd" "5e8e97fe709de4242d0a8a22a76624b88d67e9d1" "20230813021724.054":
-  entity multiplicador_tb at 8( 260) + 0 on 71;
-  architecture tb of multiplicador_tb at 14( 341) + 0 on 72;
-file . "4bitShiftRegister.vhd" "39601e21106248cdf8bbe04a2760f2fff8b0c174" "20230813023211.621":
-  entity shiftregister4bits at 1( 0) + 0 on 81;
-  architecture shiftregister4bits_arch of shiftregister4bits at 17( 428) + 3 on 82;
-file . "DFlipFlop.vhd" "9c79e36b166517090a475903537657fa4649509e" "20230813021704.660":
-  entity flipflopd at 1( 0) + 0 on 69;
-  architecture flipflopd_arch of flipflopd at 10( 163) + 0 on 70;
-file . "mult_UC.vhd" "e0974256f3396033ebac3f9d4ed031ab09e48c7a" "20230813021751.486":
-  entity unidadedecontrole at 1( 0) + 0 on 77;
-  architecture uc_arch of unidadedecontrole at 23( 462) + 0 on 78;
+file . "1bitRegister.vhd" "12289a904339967039c73bbd08394db8ef027cde" "20230814170759.242":
+  entity register1bit at 1( 0) + 0 on 95;
+  architecture register1bit_arch of register1bit at 12( 209) + 0 on 96;
 file . "4bitRegister.vhd" "7739b9a5e4bc5dcb85c524b98c75443292417d3b" "20230813021645.880":
   entity register4bits at 1( 0) + 0 on 63;
   architecture register4bits_arch of register4bits at 13( 277) + 0 on 64;
+file . "mult_UC.vhd" "e0974256f3396033ebac3f9d4ed031ab09e48c7a" "20230813021751.486":
+  entity unidadedecontrole at 1( 0) + 0 on 77;
+  architecture uc_arch of unidadedecontrole at 23( 462) + 0 on 78;
+file . "DFlipFlop.vhd" "9c79e36b166517090a475903537657fa4649509e" "20230813021704.660":
+  entity flipflopd at 1( 0) + 0 on 69;
+  architecture flipflopd_arch of flipflopd at 10( 163) + 0 on 70;
+file . "4bitShiftRegister.vhd" "39601e21106248cdf8bbe04a2760f2fff8b0c174" "20230813023211.621":
+  entity shiftregister4bits at 1( 0) + 0 on 81;
+  architecture shiftregister4bits_arch of shiftregister4bits at 17( 428) + 3 on 82;
+file . "ssm_tb.vhd" "0ce540dcdbe18081e9ac20565c8f27a62ad95294" "20230814175959.770":
+  entity multiplicador_tb at 8( 260) + 0 on 109;
+  architecture tb of multiplicador_tb at 14( 341) + 0 on 110;
+file . "sum_shift_multiplier.vhd" "dcd2b71c0c99b85262d1d1ab3f764a9483dff59d" "20230813021728.565":
+  entity multiplicador_modificado at 1( 0) + 0 on 73;
+  architecture mm_arch of multiplicador_modificado at 15( 291) + 0 on 74;
+file . "3bitCounter.vhd" "7fb37b3098baefd9007f144a311921410fc5f46d" "20230813021636.161":
+  entity counter3bits at 1( 0) + 0 on 59;
+  architecture counter3bits_arch of counter3bits at 15( 343) + 0 on 60;
+file . "4bitAdder.vhd" "25dca8b7cd9212ee792d134e1a0ae9c0f48dea55" "20230813021641.588":
+  entity adder4bits at 1( 0) + 0 on 61;
+  architecture adder4bits_arch of adder4bits at 12( 218) + 0 on 62;
+file . "8bitShiftRegister.vhd" "a0bcf3d98189db627b9be9438bef7887c76f7e22" "20230814172857.389":
+  entity shiftregister8bits at 1( 0) + 0 on 103;
+  architecture shiftregister8bits_arch of shiftregister8bits at 16( 400) + 3 on 104;
+file . "mult_FD.vhd" "4a7194a466b3cafb4de4d4b0800c595c40ea164e" "20230814171636.551":
+  entity fluxodedados at 1( 0) + 0 on 101;
+  architecture fd_arch of fluxodedados at 22( 489) + 0 on 102;
