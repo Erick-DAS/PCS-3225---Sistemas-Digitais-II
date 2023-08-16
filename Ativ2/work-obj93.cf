@@ -1,0 +1,43 @@
+v 4
+file . "zero_detector.vhd" "2b88a7e351e60602b9731a78659032b0ab676e95" "20230816191716.921":
+  entity zero_detector at 8( 241) + 0 on 37;
+  architecture dataflow of zero_detector at 15( 352) + 0 on 38;
+  architecture when_else_arch of zero_detector at 23( 497) + 0 on 39;
+  architecture with_select_arch of zero_detector at 32( 660) + 0 on 40;
+file . "multiplicador_uc.vhd" "ff9273a4ed8e8c43f2a05eee99e8a0bb398bc3f7" "20230816191607.428":
+  entity multiplicador_uc at 7( 265) + 0 on 33;
+  architecture fsm of multiplicador_uc at 24( 574) + 0 on 34;
+file . "reg8.vhd" "474d62fbb0ff4d3472c97c11fc771716c1321485" "20230816191552.725":
+  entity reg8 at 8( 250) + 0 on 29;
+  architecture arch_reg8 of reg8 at 19( 446) + 0 on 30;
+file . "mux4_2to1.vhd" "c8e325eccf634d3397646723053dbe3751554cc3" "20230816191538.127":
+  entity mux4_2to1 at 8( 234) + 0 on 25;
+  architecture with_select of mux4_2to1 at 17( 431) + 0 on 26;
+file . "fa_4bit.vhd" "b4443aac26d1abcf65e32c21c5c36f7e703a7a8b" "20230816191445.989":
+  entity fa_4bit at 8( 225) + 0 on 21;
+  architecture ripple of fa_4bit at 17( 482) + 0 on 22;
+file . "multiplicador_tb_vetorteste.vhd" "28fd86ca3f11797d9d00bbcdde035deeba915bd2" "20230816193633.002":
+  entity multiplicador_tb_vetorteste at 1( 0) + 0 on 47;
+  architecture tb_arch of multiplicador_tb_vetorteste at 7( 113) + 0 on 48;
+file . "fa_1bit.vhd" "2a1f595cbfb5f83e3c8789ade0ab18a49014ba6a" "20230816191425.817":
+  entity fa_1bit at 8( 225) + 0 on 15;
+  architecture sum_minterm of fa_1bit at 17( 418) + 0 on 16;
+  architecture product_maxterm of fa_1bit at 32( 882) + 0 on 17;
+  architecture wakerly of fa_1bit at 48( 1352) + 0 on 18;
+  architecture bug1 of fa_1bit at 55( 1550) + 0 on 19;
+  architecture bug2 of fa_1bit at 70( 1986) + 0 on 20;
+file . "fa_8bit.vhd" "c1d32bb0ac8cf05d27286b83931e7b1b2201cf60" "20230816191448.698":
+  entity fa_8bit at 10( 328) + 0 on 23;
+  architecture ripple of fa_8bit at 19( 492) + 0 on 24;
+file . "reg4.vhd" "9c9526d56f8983de84cba64ff7e768983c102d84" "20230816191550.373":
+  entity reg4 at 7( 249) + 0 on 27;
+  architecture arch_reg4 of reg4 at 18( 445) + 0 on 28;
+file . "multiplicador_fd.vhd" "6001298b11542585a75004b5b9c935336d44cc89" "20230816191604.110":
+  entity multiplicador_fd at 10( 295) + 0 on 31;
+  architecture structural of multiplicador_fd at 23( 570) + 0 on 32;
+file . "multiplicador.vhd" "155006fa7600b97d2ca21a2f184c074dfdbd6e61" "20230816191610.181":
+  entity multiplicador at 7( 242) + 0 on 35;
+  architecture structural of multiplicador at 21( 519) + 0 on 36;
+file . "multiplicador_tb_arquivo.vhd" "5b7bab017d19c1a978481f284450d87f3745cfee" "20230816193851.509":
+  entity multiplicador_tb_arquivo at 1( 0) + 0 on 51;
+  architecture multiplicador_tb_arquivo_arch of multiplicador_tb_arquivo at 8( 127) + 0 on 52;
