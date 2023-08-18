@@ -36,6 +36,7 @@ ARCHITECTURE tb_arch OF multiplicador_tb_vetorteste IS
     SIGNAL keep_simulating : BIT := '0';
     CONSTANT clockPeriod : TIME := 1 ns;
 BEGIN
+    ASSERT false REPORT "Simulation start" SEVERITY note;
     Clock <= (NOT Clock) AND keep_simulating AFTER clockPeriod/2;
 
     dut : multiplicador PORT MAP(
@@ -51,11 +52,10 @@ BEGIN
     stimulus : PROCESS IS
     BEGIN
         keep_simulating <= '1';
-        ASSERT false REPORT "Simulation start" SEVERITY note;
         Reset <= '1';
         Start <= '0';
-        WAIT FOR clockPeriod;
         FOR i IN tests_case'RANGE LOOP
+            WAIT FOR clockPeriod;
             Reset <= '0';
             Va <= tests_case(i).Va;
             Vb <= tests_case(i).Vb;
