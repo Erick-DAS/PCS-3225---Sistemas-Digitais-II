@@ -1,0 +1,5 @@
+# Simulations
+*.vcd
+
+# GHDL Library files
+*.cf
