@@ -17,7 +17,7 @@ architecture Counter3Bits_arch of Counter3Bits is
     
 begin
     count_variable <= bit_vector(current_count);
-    RCO <= '1' when current_count = "100" else '0';
+    RCO <= '1' when current_count = "100" else '0'; -- RCO enables on "100" in order to know when all the 4 bits from "multiplicando" were analyzed 
     process (clock, clear)
     begin
         if (clear = '1') then
