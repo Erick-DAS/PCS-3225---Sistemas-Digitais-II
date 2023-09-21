@@ -24,12 +24,12 @@ end deslocador15;
         if (limpa = '1') then
             current_value <= "00000000";
         
-        elsif (rising_edge(clock)) then
+        elsif (falling_edge(clock)) then
             if (carrega = '1') then
                 current_value <= dados;
             end if;
         
-        elsif (falling_edge(clock) and desloca = '1') then
+        elsif (rising_edge(clock) and desloca = '1') then
             current_value(0) <= current_value(1);
             current_value(1) <= current_value(2);
             current_value(2) <= current_value(3);
