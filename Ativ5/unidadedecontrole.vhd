@@ -6,11 +6,20 @@ entity unidadeDeControle is
     port (
         clock : in bit;
         reset : in bit;
-        start : in bit
+        start : in bit;
+        done  : out bit;
+
+        zera_contadores: out bit;
+        CF_conta: out bit;
+        
+        D_limpa: out bit;
+        D_carrega: out bit;
+        D_desloca: out bit;
+
     );
 end entity;
 
-architecture behave of unidadeDeControle is 
+architecture UC_behave of unidadeDeControle is 
     type state is (s0, s1, s2, s3, s4);
     signal current_state, next_state : state := s0;
 begin
