@@ -13,3 +13,14 @@ entity onescounter is
     );
 end entity;
 
+architecture onescounter_behave of onescounter is
+    signal zera_contadores, CF_conta, D_limpa, D_carrega, D_desloca, CR_fim, CF_fim : bit;
+    signal CR_Q, CR_F : bit_vector(3 downto 0);
+    signal D_saida : bit_vector(14 downto 0);
+begin
+
+FD: fluxoDeDados port map(clock, inport, outport, zera_contadores, CF_conta, CR_fim, CF_fim, CR_Q, CR_F, D_limpa, D_carrega, D_desloca, D_saida);
+UC: unidadeDeControle port map(clock, reset, start, done, zera_contadores, CF_conta, D_limpa, D_carrega, D_desloca);
+
+end architecture;
+

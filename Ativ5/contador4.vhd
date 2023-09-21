@@ -8,7 +8,7 @@ entity contador4 is
           conta : in bit;
           fim   : out bit;
           Q     : out bit_vector(3 downto 0));
-end entity;
+end contador4;
 
 architecture contador4_arch of contador4 is
     signal current_count : unsigned(3 downto 0);
