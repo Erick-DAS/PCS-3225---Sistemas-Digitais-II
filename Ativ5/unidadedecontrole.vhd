@@ -1,65 +1,92 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_bit.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_bit.ALL;
 
-entity unidadeDeControle is 
-    port (
-        clock : in bit;
-        reset : in bit;
-        start : in bit;
-        done  : out bit;
+ENTITY unidadeDeControle IS
+    PORT (
+        clock : IN BIT;
+        reset : IN BIT;
+        start : IN BIT;
+        done : OUT BIT;
 
-        zera_contadores: out bit;
-        CF_conta: out bit;
-        
-        D_limpa: out bit;
-        D_carrega: out bit;
-        D_desloca: out bit;
+        zera_contadores : OUT BIT;
+        CF_conta : OUT BIT;
+        CR_fim : IN BIT;
+        CF_fim : IN BIT;
+        CR_Q : IN bit_vector(3 DOWNTO 0);
+        CF_Q : IN bit_vector(3 DOWNTO 0);
 
+        D_limpa : OUT BIT;
+        D_carrega : OUT BIT;
+        D_desloca : OUT BIT
     );
-end entity;
+END ENTITY;
 
-architecture UC_behave of unidadeDeControle is 
-    type state is (s0, s1, s2, s3, s4);
-    signal current_state, next_state : state := s0;
-begin
-    process(clock)
-    begin
-        if (rising_edge(clock)) then
+ARCHITECTURE UC_behave OF unidadeDeControle IS
+    TYPE state IS (s0, s1, s2, s3);
+    SIGNAL current_state, next_state : state := s0;
+BEGIN
+    PROCESS (clock)
+    BEGIN
+        IF (rising_edge(clock)) THEN
             current_state <= next_state;
-        end if;
-    end process;
-        
-    process(current_state, start)
-    begin
-        case current_state is 
-            when s0 =>
-                if (start = '1') then
+        END IF;
+    END PROCESS;
+
+    PROCESS (current_state, start)
+    BEGIN
+        CASE current_state IS
+            WHEN s0 =>
+                IF (start = '1') THEN
                     next_state <= s1;
-                end if;
-            when s1 => 
+                END IF;
+            WHEN s1 =>
                 next_state <= s2;
-            when s2 =>
-                if (conta = '1') then -- conta eh o bit menos significativo do registrador
+            WHEN s2 =>
+                IF (CF_fim = '1') THEN
                     next_state <= s3;
-                end if;
-            when s3 =>
-                if (fim = '1') then --fim eh a saida do contador de 4 bits q conta ate 15
-                    next_state <= s4;
-                else 
-                    next_state <= s3;
-                end if;
-            when s4 =>
-                    next_state <= s0;
-        end case;
-    end process;
+                END IF;
+            WHEN s3 =>
+                next_state <= s0;
+        END CASE;
+    END PROCESS;
 
     --descrever as variaveis de saida em cada estado
-    process(current_state) 
-    begin
-        case current_state is 
-            when s0 =>
+    PROCESS (current_state)
+    BEGIN
+        CASE current_state IS
+            WHEN s0 =>
+                done <= '0';
+                zera_contadores <= '1';
+                D_limpa <= '0';
+                D_carrega <= '0';
+                D_desloca <= '0';
+                CF_conta <= '0';
 
-    end process; 
+            WHEN s1 =>
+                done <= '0';
+                zera_contadores <= '0';
+                D_limpa <= '0';
+                D_carrega <= '1';
+                D_desloca <= '1';
+                CF_conta <= '1';
 
-end architecture
+            WHEN s2 =>
+                done <= '0';
+                zera_contadores <= '0';
+                D_limpa <= '0';
+                D_carrega <= '0';
+                D_desloca <= '1';
+                CF_conta <= '1';
+
+            WHEN s3 =>
+                done <= '1';
+                zera_contadores <= '0';
+                D_limpa <= '0';
+                D_carrega <= '0';
+                D_desloca <= '0';
+                CF_conta <= '0';
+        END CASE;
+    END PROCESS;
+
+END ARCHITECTURE;

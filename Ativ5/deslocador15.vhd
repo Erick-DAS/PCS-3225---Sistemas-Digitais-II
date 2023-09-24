@@ -1,35 +1,36 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_bit.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_bit.ALL;
 
-entity deslocador15 is
-    
-    port (clock   : in bit;
-          limpa   : in bit;
-          carrega : in bit;
-          dados   : in bit_vector(14 downto 0);
-          entrada : in bit;
-          desloca : in bit;
-          saida   : out bit_vector(14 downto 0));
-    
-end deslocador15;
-   
-   architecture deslocador15_arch of deslocador15 is
-    signal current_value : bit_vector (14 downto 0);
-    begin
-      saida <= current_value(14 downto 0);
+ENTITY deslocador15 IS
 
-    process(clock, limpa)
-    begin
-        if (limpa = '1') then
-            current_value <= "00000000";
-        
-        elsif (falling_edge(clock)) then
-            if (carrega = '1') then
+    PORT (
+        clock : IN BIT;
+        limpa : IN BIT;
+        carrega : IN BIT;
+        dados : IN bit_vector(14 DOWNTO 0);
+        entrada : IN BIT;
+        desloca : IN BIT;
+        saida : OUT bit_vector(14 DOWNTO 0));
+
+END deslocador15;
+
+ARCHITECTURE deslocador15_arch OF deslocador15 IS
+    SIGNAL current_value : bit_vector (14 DOWNTO 0);
+BEGIN
+    saida <= current_value(14 DOWNTO 0);
+
+    PROCESS (clock, limpa)
+    BEGIN
+        IF (limpa = '1') THEN
+            current_value <= "000000000000000";
+
+        ELSIF (falling_edge(clock)) THEN
+            IF (carrega = '1') THEN
                 current_value <= dados;
-            end if;
-        
-        elsif (rising_edge(clock) and desloca = '1') then
+            END IF;
+
+        ELSIF (rising_edge(clock) AND desloca = '1') THEN
             current_value(0) <= current_value(1);
             current_value(1) <= current_value(2);
             current_value(2) <= current_value(3);
@@ -45,6 +46,6 @@ end deslocador15;
             current_value(12) <= current_value(13);
             current_value(13) <= current_value(14);
             current_value(14) <= entrada;
-        end if;
-    end process;
-  end architecture;
+        END IF;
+    END PROCESS;
+END ARCHITECTURE;
