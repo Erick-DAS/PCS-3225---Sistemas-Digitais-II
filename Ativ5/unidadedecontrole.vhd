@@ -33,7 +33,7 @@ BEGIN
         END IF;
     END PROCESS;
 
-    PROCESS (current_state, start)
+    PROCESS (current_state, start, reset, CF_fim)
     BEGIN
         CASE current_state IS
             WHEN s0 =>
@@ -42,8 +42,13 @@ BEGIN
                 END IF;
             WHEN s1 =>
                 next_state <= s2;
+                IF (reset = '1') THEN
+                    next_state <= s0;
+                END IF;
             WHEN s2 =>
-                IF (CF_fim = '1') THEN
+                IF (reset = '1') THEN
+                    next_state <= s0;
+                ELSIF (CF_fim = '1') THEN
                     next_state <= s3;
                 END IF;
             WHEN s3 =>
@@ -57,7 +62,7 @@ BEGIN
         CASE current_state IS
             WHEN s0 =>
                 done <= '0';
-                zera_contadores <= '1';
+                zera_contadores <= '0';
                 D_limpa <= '0';
                 D_carrega <= '0';
                 D_desloca <= '0';
@@ -65,7 +70,7 @@ BEGIN
 
             WHEN s1 =>
                 done <= '0';
-                zera_contadores <= '0';
+                zera_contadores <= '1';
                 D_limpa <= '0';
                 D_carrega <= '1';
                 D_desloca <= '1';

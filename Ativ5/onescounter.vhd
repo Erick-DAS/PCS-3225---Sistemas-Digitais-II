@@ -56,9 +56,10 @@ ARCHITECTURE onescounter_behave OF onescounter IS
 
     SIGNAL zera_contadores, CF_conta, D_limpa, D_carrega, D_desloca, CR_fim, CF_fim : BIT;
     SIGNAL CR_Q, CF_Q : bit_vector(3 DOWNTO 0);
+    signal inverted_clock : bit;
 BEGIN
-
-    FD : fluxoDeDados PORT MAP(clock, inport, outport, zera_contadores, CF_conta, CR_fim, CF_fim, CR_Q, CF_Q, D_limpa, D_carrega, D_desloca);
+    inverted_clock <= not clock;
+    FD : fluxoDeDados PORT MAP(inverted_clock, inport, outport, zera_contadores, CF_conta, CR_fim, CF_fim, CR_Q, CF_Q, D_limpa, D_carrega, D_desloca);
     UC : unidadeDeControle PORT MAP(clock, reset, start, done, zera_contadores, CF_conta, CR_fim, CF_fim, CR_Q, CF_Q, D_limpa, D_carrega, D_desloca);
 
 END ARCHITECTURE;
