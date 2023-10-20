@@ -1,54 +1,52 @@
 -- Complete no espaco o codigo do port do testbench
 LIBRARY IEEE;
-USE IEEE.numeric_bit.all;
+USE IEEE.numeric_bit.ALL;
 
-entity testbench is
-end testbench;
+ENTITY testbench IS
+END testbench;
 
--- Complete no espaco os sinais e componentes a serem utilizados
+-- Complete nogg espaco os sinais e componentes a serem utilizados
 
-architecture beh of testbench is
+ARCHITECTURE beh OF testbench IS
 
-    component log is 
-        port (
-            clock, inicio : in bit;
-            x             : in bit_vector(7 downto 0);
-            R             : out bit_vector(7 downto 0);
-            fim           : out bit
+    COMPONENT log IS
+        PORT (
+            clock, inicio : IN BIT;
+            x : IN bit_vector(7 DOWNTO 0);
+            R : OUT bit_vector(7 DOWNTO 0);
+            fim : OUT BIT
         );
-    end component;
+    END COMPONENT;
 
-    signal clk, run : bit;
+    SIGNAL clk, run : BIT;
 
--- Complete no espaco para gerar o clock
--- Depois , complete no espaco para que
--- o DUT seja instanciado
-    signal X, r : bit_vector(7 downto 0);
-    signal Inicio, Fim : bit;
+    -- Complete no espaco para gerar o clock
+    -- Depois , complete no espaco para que
+    -- o DUT seja instanciado
+    SIGNAL X, r : bit_vector(7 DOWNTO 0);
+    SIGNAL Inicio, Fim : BIT;
 
-begin
-    assert false report "Inicio da simulacao" severity note;
-    clk <= (not clk) and run after 10 ns;
-    DUT: log port map(
+BEGIN
+    ASSERT false REPORT "Inicio da simulacao" SEVERITY note;
+    clk <= (NOT clk) AND run AFTER 10 ns;
+    DUT : log PORT MAP(
         clock => clk,
         inicio => Inicio,
         x => X,
         R => r,
         fim => Fim
     );
-    
+
     -- Insira neste trecho o caso de teste
-    process
-    begin
+    PROCESS
+    BEGIN
         run <= '1';
         x <= "11000001";
-        wait for 1 ns;
+        WAIT FOR 1 ns;
         inicio <= '1';
-            
 
-
-        assert (R = "01001010") report "Houve um erro. O resultado esperado era 01001010, o obtido foi " & INTEGER'image(to_integer(unsigned(R))) severity error; 
+        ASSERT (R = "01001010") REPORT "Houve um erro. O resultado esperado era 01001010, o obtido foi " & INTEGER'image(to_integer(unsigned(R))) SEVERITY error;
         run <= '0';
-        wait;
-    end process;
-end beh;
+        WAIT;
+    END PROCESS;
+END beh;
