@@ -1,4 +1,6 @@
 -- Complete no espaco o codigo do port do testbench
+LIBRARY IEEE;
+USE IEEE.numeric_bit.all;
 
 entity testbench is
 end testbench;
@@ -12,7 +14,7 @@ architecture beh of testbench is
             clock, inicio : in bit;
             x             : in bit_vector(7 downto 0);
             R             : out bit_vector(7 downto 0);
-            fim           : out bit;
+            fim           : out bit
         );
     end component;
 
@@ -28,25 +30,25 @@ begin
     assert false report "Inicio da simulacao" severity note;
     clk <= (not clk) and run after 10 ns;
     DUT: log port map(
-        clk => clock,
-        Inicio => inicio,
-        X => x,
-        r => r,
-        Fim => fim
+        clock => clk,
+        inicio => Inicio,
+        x => X,
+        R => r,
+        fim => Fim
     );
     
     -- Insira neste trecho o caso de teste
     process
     begin
-        run <= 1;
+        run <= '1';
         x <= "11000001";
         wait for 1 ns;
-        inicio <= 1;
+        inicio <= '1';
             
 
 
         assert (R = "01001010") report "Houve um erro. O resultado esperado era 01001010, o obtido foi " & INTEGER'image(to_integer(unsigned(R))) severity error; 
-        run <= 0;
+        run <= '0';
         wait;
     end process;
 end beh;
