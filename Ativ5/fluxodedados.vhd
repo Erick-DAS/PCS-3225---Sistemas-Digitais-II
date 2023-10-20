@@ -1,56 +1,56 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_bit.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_bit.ALL;
 
-entity fluxoDeDados is
-    port (
-        clock   : in bit;
-        inport  : in bit_vector(14 downto 0);
-        outport : out bit_vector(3 downto 0);
+ENTITY fluxoDeDados IS
+    PORT (
+        clock : IN BIT;
+        inport : IN bit_vector(14 DOWNTO 0);
+        outport : OUT bit_vector(3 DOWNTO 0);
 
-        zera_contadores: in bit;
-        CF_conta: in bit;
-        CR_fim: out bit;
-        CF_fim: out bit;
-        CR_Q: out bit_vector(3 downto 0);
-        CR_F: out bit_vector(3 downto 0);
-        
-        D_limpa: in bit;
-        D_carrega: in bit;
-        D_desloca: in bit;
-        D_saida: out bit_vector(14 downto 0);
+        zera_contadores : IN BIT;
+        CF_conta : IN BIT;
+        CR_fim : OUT BIT;
+        CF_fim : OUT BIT;
+        CR_Q : OUT bit_vector(3 DOWNTO 0);
+        CF_Q : OUT bit_vector(3 DOWNTO 0);
 
+        D_limpa : IN BIT;
+        D_carrega : IN BIT;
+        D_desloca : IN BIT
     );
-end entity;
+END ENTITY;
 
-architecture FD_behave of fluxoDeDados is
+ARCHITECTURE FD_behave OF fluxoDeDados IS
 
-component contador4 is
-    port (clock : in bit;
-          zera  : in bit;
-          conta : in bit;
-          fim   : out bit;
-          Q     : out bit_vector(3 downto 0));
-end component;
+    COMPONENT contador4 IS
+        PORT (
+            clock : IN BIT;
+            zera : IN BIT;
+            conta : IN BIT;
+            fim : OUT BIT;
+            Q : OUT bit_vector(3 DOWNTO 0));
+    END COMPONENT;
 
-component deslocador15 is
-    port (clock   : in bit;
-          limpa   : in bit;
-          carrega : in bit;
-          dados   : in bit_vector(14 downto 0);
-          entrada : in bit;
-          desloca : in bit;
-          saida   : out bit_vector(14 downto 0));
-end component;
+    COMPONENT deslocador15 IS
+        PORT (
+            clock : IN BIT;
+            limpa : IN BIT;
+            carrega : IN BIT;
+            dados : IN bit_vector(14 DOWNTO 0);
+            entrada : IN BIT;
+            desloca : IN BIT;
+            saida : OUT bit_vector(14 DOWNTO 0));
+    END COMPONENT;
 
-signal CR_conta: bit;
+    SIGNAL CR_conta : BIT;
+    SIGNAL reg_value : bit_vector(14 DOWNTO 0);
+BEGIN
 
-begin
+    CR_conta <= inport(0) WHEN D_carrega = '1' ELSE
+        reg_value(0);
+    contadorReal : contador4 PORT MAP(clock, zera_contadores, CR_conta, CR_fim, outport);
+    contadorFinal : contador4 PORT MAP(clock, zera_contadores, CF_conta, CF_fim, CF_Q);
+    deslocador : deslocador15 PORT MAP(clock, D_limpa, D_carrega, inport, '0', D_desloca, reg_value);
 
-    CR_conta <= inport(0);
-
-    contadorReal: contador4 port map (clock, zera_contador, CR_conta, CR_fim, outport);
-    contadorFinal: contador4 port map (clock, zera_contador, CF_conta, CF_fim, CF_Q);
-    deslocador: deslocador15 port map (clock, D_limpa, D_carrega, inport, '0', D_desloca, D_saida);
-
-end architecture
+END ARCHITECTURE;

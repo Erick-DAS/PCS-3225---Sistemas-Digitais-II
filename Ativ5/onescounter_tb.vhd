@@ -5,17 +5,16 @@ ENTITY onescounter_tb IS
 END onescounter_tb;
 
 ARCHITECTURE tb_arch OF onescounter_tb IS
-    COMPONENT multiplicador IS
+    COMPONENT onescounter IS
         PORT (
-            clock : in bit;
-            reset : in bit;
-            start : in bit;
-            inport : in bit_vector(14 downto 0);
-            outport : out bit_vector(3 downto 0);
-            done : out bit
+            clock : IN BIT;
+            reset : IN BIT;
+            start : IN BIT;
+            inport : IN bit_vector(14 DOWNTO 0);
+            outport : OUT bit_vector(3 DOWNTO 0);
+            done : OUT BIT
         );
     END COMPONENT;
-
     TYPE pattern IS RECORD
         inport : bit_vector(14 DOWNTO 0);
         outport : bit_vector(3 DOWNTO 0);
@@ -23,10 +22,10 @@ ARCHITECTURE tb_arch OF onescounter_tb IS
 
     TYPE pattern_array IS ARRAY (NATURAL RANGE <>) OF pattern;
     CONSTANT tests_case : pattern_array := (
+        ("101010101010101", "1000"),
+        ("111111111111111", "1111"),
         ("000000000000000", "0000"),
-        ("111111111111111", "1111"), 
-        ("101010101010101", "0100"),
-        ("010101010101010", "0011"),
+        ("010101010101010", "0111"),
         ("100000000000000", "0001"),
         ("011111111111111", "1110"),
         ("000000000000001", "0001"),
@@ -34,7 +33,7 @@ ARCHITECTURE tb_arch OF onescounter_tb IS
     );
 
     SIGNAL Clock, Reset, Start, Done : BIT;
-    SIGNAL inport: bit_vector(14 DOWNTO 0);
+    SIGNAL inport : bit_vector(14 DOWNTO 0);
     SIGNAL outport : bit_vector(3 DOWNTO 0);
 
     SIGNAL keep_simulating : BIT := '0';
@@ -67,8 +66,8 @@ BEGIN
             Start <= '0';
             WAIT UNTIL Done = '1';
             ASSERT (outport /= tests_case(i).outport)
-            REPORT INTEGER'image(i) & ".OK: " & INTEGER'image(to_integer(unsigned(Va))) & " * " & INTEGER'image(to_integer(unsigned(Vb))) & " = " & INTEGER'image(to_integer(unsigned(outport))) SEVERITY note;
-            ASSERT (outport = tests_case(i).outport) REPORT "expected: " & INTEGER'image(to_integer(unsigned(tests_case(i).outport))) & " got: " & INTEGER'image(to_integer(unsigned(Vresult))) SEVERITY error;
+            REPORT INTEGER'image(i) & ".OK: " & INTEGER'image(to_integer(unsigned(inport))) & " -> " & INTEGER'image(to_integer(unsigned(outport))) SEVERITY note;
+            ASSERT (outport = tests_case(i).outport) REPORT "expected: " & INTEGER'image(to_integer(unsigned(tests_case(i).outport))) & " got: " & INTEGER'image(to_integer(unsigned(outport))) SEVERITY error;
         END LOOP;
 
         ASSERT false REPORT "Simulation ended" SEVERITY note;

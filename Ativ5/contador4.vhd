@@ -1,28 +1,30 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_bit.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_bit.ALL;
 
-entity contador4 is
-    port (clock : in bit;
-          zera  : in bit;
-          conta : in bit;
-          fim   : out bit;
-          Q     : out bit_vector(3 downto 0));
-end contador4;
+ENTITY contador4 IS
+    PORT (
+        clock : IN BIT;
+        zera : IN BIT;
+        conta : IN BIT;
+        fim : OUT BIT;
+        Q : OUT bit_vector(3 DOWNTO 0));
+END contador4;
 
-architecture contador4_arch of contador4 is
-    signal current_count : unsigned(3 downto 0);
-begin
+ARCHITECTURE contador4_arch OF contador4 IS
+    SIGNAL current_count : unsigned(3 DOWNTO 0);
+BEGIN
     Q <= bit_vector(current_count);
-    fim <= '1' when current_count = "1111" else '0';
-    process (clock, zera)
-    begin
-        if (zera = '1') then
-            current_count <= "000";
-        elsif (rising_edge(clock)) then
-            if (conta = '1') then
+    fim <= '1' WHEN current_count = "1111" ELSE
+        '0';
+    PROCESS (clock, zera)
+    BEGIN
+        IF (zera = '1') THEN
+            current_count <= "0000";
+        ELSIF (rising_edge(clock)) THEN
+            IF (conta = '1') THEN
                 current_count <= current_count + 1;
-            end if;
-        end if;
-    end process;
-end architecture;
+            END IF;
+        END IF;
+    END PROCESS;
+END ARCHITECTURE;
