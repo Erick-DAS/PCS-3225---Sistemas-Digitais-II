@@ -3,7 +3,7 @@
 entity testbench is
 end testbench;
 
--- Complete no espaco os sinais e componentes a serem utilizados
+-- Complete nogg espaco os sinais e componentes a serem utilizados
 
 architecture beh of testbench is
 
@@ -31,7 +31,7 @@ begin
         clk => clock,
         Inicio => inicio,
         X => x,
-        r => r,
+        r => R,
         Fim => fim
     );
     
@@ -39,13 +39,18 @@ begin
     process
     begin
         run <= 1;
-        x <= "11000001";
-        wait for 1 ns;
-        inicio <= 1;
-            
+        Inicio <= 0;
+        
+        wait for 20 ns;
+            X <= "11000001";
+        
+        wait until falling_edge(Clock);
+            Inicio <= 1;
+        wait until falling_edge(Clock);
+            Inicio <= 0;
+        wait until Fim = 1;
 
-
-        assert (R = "01001010") report "Houve um erro. O resultado esperado era 01001010, o obtido foi " & INTEGER'image(to_integer(unsigned(R))) severity error; 
+        assert (r = "01001010") report "Houve um erro. O resultado esperado era 01001010, o obtido foi " & INTEGER'image(to_integer(unsigned(R))) severity error; 
         run <= 0;
         wait;
     end process;
