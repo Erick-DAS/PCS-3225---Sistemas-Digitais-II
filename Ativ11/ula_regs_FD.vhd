@@ -1,45 +1,52 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all ;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 --
 -- Agrupamento da ULA e Banco de Registradores
 --
-entity ULARegs is
-    port (
-        y: out std_logic_vector (63 downto 0); -- saida da ULA
-        op : in std_logic_vector (3 downto 0); -- operacao a realizar
-        zero : out std_logic; -- indica o resultado zero
-        Rd : in std_logic_vector (4 downto 0); -- indice do registrador a escrever
-        Rm : in std_logic_vector (4 downto 0); -- indice do registrador 1 (ler )
-        Rn : in std_logic_vector (4 downto 0); -- indice do registrador 2 (ler )
-        we : in std_logic; -- habilitacao de escrita
-        clk : in std_logic); -- sinal de clock
-end entity ;
+ENTITY ULARegs IS
+    PORT (
+        --intput signals
+        op : IN STD_LOGIC_VECTOR (3 DOWNTO 0); -- operacao a realizar
+        Rd : IN STD_LOGIC_VECTOR (4 DOWNTO 0); -- indice do registrador a escrever
+        Rm : IN STD_LOGIC_VECTOR (4 DOWNTO 0); -- indice do registrador 1 (ler )
+        Rn : IN STD_LOGIC_VECTOR (4 DOWNTO 0); -- indice do registrador 2 (ler )
+        we : IN STD_LOGIC; -- habilitacao de escrita
+        clk : IN STD_LOGIC; -- sinal de clock
+        --output signals 
+        zero : OUT STD_LOGIC; -- indica o resultado zero
+        y : OUT STD_LOGIC_VECTOR (63 DOWNTO 0) -- saida da ULA
+    );
+END ENTITY;
 
-architecture ULARegs_arch of ULARegs is
+ARCHITECTURE ULARegs_arch OF ULARegs IS
 
-component ULA is
-    port (
-        x1 , x2 : in std_logic_vector (63 downto 0); -- entradas
-        op : in std_logic_vector (3 downto 0); -- operacao a realizar
-        y: out std_logic_vector (63 downto 0); -- saida
-        zero : out std_logic); -- indica o resultado zero
-end component;
+    COMPONENT ULA IS
+        PORT (
+            x1, x2 : IN STD_LOGIC_VECTOR (63 DOWNTO 0); -- entradas
+            op : IN STD_LOGIC_VECTOR (3 DOWNTO 0); -- operacao a realizar
+            y : OUT STD_LOGIC_VECTOR (63 DOWNTO 0); -- saida
+            zero : OUT STD_LOGIC); -- indica o resultado zero
+    END COMPONENT;
 
-component banco is
-    port (
-        clk : in std_logic -- sinal de clock
-        we : in std_logic ; -- habilitacao de escrita
-        W: in std_logic_vector (63 downto 0); -- valor de entrada
-        Rm : in std_logic_vector (4 downto 0); -- indice do registrador 1 ( ler )
-        Rn : in std_logic_vector (4 downto 0); -- indice do registrador 2 ( ler )
-        Rd : in std_logic_vector (4 downto 0); -- indice do registrador a escrever
-        Ra : out std_logic_vector (63 downto 0); -- primeira saida
-        Rb : out std_logic_vector (63 downto 0)); -- segunda saida
-end component;
+    COMPONENT banco IS
+        PORT (
+            clk : IN STD_LOGIC; -- sinal de clock
+            we : IN STD_LOGIC; -- habilitacao de escrita
+            W : IN STD_LOGIC_VECTOR (63 DOWNTO 0); -- valor de entrada
+            Rm : IN STD_LOGIC_VECTOR (4 DOWNTO 0); -- indice do registrador 1 ( ler )
+            Rn : IN STD_LOGIC_VECTOR (4 DOWNTO 0); -- indice do registrador 2 ( ler )
+            Rd : IN STD_LOGIC_VECTOR (4 DOWNTO 0); -- indice do registrador a escrever
+            Ra : OUT STD_LOGIC_VECTOR (63 DOWNTO 0); -- primeira saida
+            Rb : OUT STD_LOGIC_VECTOR (63 DOWNTO 0)); -- segunda saida
+    END COMPONENT;
 
-begin
-    ULA: ULA port map ()
+    SIGNAL Ra, Rb : STD_LOGIC_VECTOR (63 DOWNTO 0); -- entradas da ULA/Saida do banco de Registradores
+    SIGNAL saida : STD_LOGIC_VECTOR (63 DOWNTO 0); -- saida da ULA/Entrada do banco de Registradores
 
-    BancoDeRegistradores: banco port map ()
-end architecture;
+BEGIN
+    unidadeLogica : ULA PORT MAP(Ra, Rb, op, saida, zero);
+    BancoDeRegistradores : banco PORT MAP(clk, we, saida, Rm, Rn, Rd, Ra, Rb);
+    y <= saida;
+
+END ARCHITECTURE;
