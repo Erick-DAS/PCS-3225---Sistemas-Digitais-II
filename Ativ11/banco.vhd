@@ -29,10 +29,10 @@ ARCHITECTURE behavior OF banco IS
     );
 BEGIN
     -- saidas
-    Ra <= (OTHERS => '0') WHEN Rn = "11111" ELSE
-        r(to_integer(unsigned(Rn)));
-    Rb <= (OTHERS => '0') WHEN Rm = "11111" ELSE
+    Ra <= (OTHERS => '0') WHEN Rm = "11111" ELSE
         r(to_integer(unsigned(Rm)));
+    Rb <= (OTHERS => '0') WHEN Rn = "11111" ELSE
+        r(to_integer(unsigned(Rn)));
 
     -- entrada
     r(to_integer(unsigned(Rd))) <= W WHEN (we = '1') AND rising_edge(clk);

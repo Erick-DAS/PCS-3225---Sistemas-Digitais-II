@@ -34,16 +34,16 @@ ARCHITECTURE testbench_behave OF testbench IS
     TYPE test_array IS ARRAY (NATURAL RANGE <>) OF test;
     CONSTANT tests_case : test_array := (
     ("0000", "00100", "00000", "00001", '1', '1', x"0000000000000000"),
-        ("0001", "00100", "0000", "00001", '1', '0', x"00000000000AFFF5"),
-        ("0010", "00100", "0000", "00001", '1', '0', x"000000000000FFFF"),
-        ("0110", "00100", "0000", "00001", '1', '0', x"0000000000005555"),
-        ("0011", "00100", "0000", "00001", '1', '0', x"0000000000005555"),
-        ("1100", "00100", "0000", "00001", '1', '0', x"000000000000FFFF")
+        ("0001", "00100", "00000", "00001", '1', '0', x"000000000000FFFF"),
+        ("0010", "00100", "00000", "00001", '1', '0', x"000000000000FFFF"),
+        ("0110", "00100", "00000", "00001", '1', '0', x"0000000000005555"),
+        ("0011", "00100", "00000", "00001", '1', '0', x"0000000000005555"),
+        ("1100", "00100", "00000", "00001", '1', '0', x"ffffffffffff0000")
     );
 
     SIGNAL clk : STD_LOGIC := '0';
-    SIGNAL keep_simulating : BIT := '0';
-    SIGNAL clockPeriod : TIME := 10 ns;
+    SIGNAL keep_simulating : STD_LOGIC := '0';
+    SIGNAL clockPeriod : TIME := 1 ns;
     SIGNAL op : STD_LOGIC_VECTOR (3 DOWNTO 0);
     SIGNAL Rd : STD_LOGIC_VECTOR (4 DOWNTO 0);
     SIGNAL Rm : STD_LOGIC_VECTOR (4 DOWNTO 0);
@@ -77,8 +77,11 @@ BEGIN
             Rn <= tests_case(i).Rn;
             we <= tests_case(i).we;
             WAIT FOR clockPeriod;
-            ASSERT zero = tests_case(i).zero REPORT INTEGER'IMAGE(i) & ": Zero error" SEVERITY error;
-            ASSERT y = tests_case(i).y REPORT INTEGER'IMAGE(i) & ": Y error" SEVERITY error;
+            ASSERT zero /= tests_case(i).zero REPORT INTEGER'IMAGE(i) & ". zero ok" SEVERITY note;
+            ASSERT y /= tests_case(i).y REPORT INTEGER'IMAGE(i) & ". Y ok" SEVERITY note;
+            ASSERT zero = tests_case(i).zero REPORT INTEGER'IMAGE(i) & ". expected: " & STD_LOGIC'image(tests_case(i).zero) & " got: " & STD_LOGIC'image(zero) SEVERITY error;
+            ASSERT y = tests_case(i).y REPORT INTEGER'IMAGE(i) & ". expected: " & to_hstring(tests_case(i).y) & " got: " & to_hstring(y) SEVERITY error;
+
         END LOOP;
 
         keep_simulating <= '0';
