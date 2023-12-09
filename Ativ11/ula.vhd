@@ -6,15 +6,14 @@ use ieee.numeric_std.all ;
 --
 entity ULA is
     port (
-        y: out std_logic_vector (63 downto 0); -- saida
-        x1 , x2 : in std_logic_vector (63 downto 0); -- entradas
+        x1, x2 : in std_logic_vector (63 downto 0); -- entradas
         op : in std_logic_vector (3 downto 0); -- operacao a realizar
+        y: out std_logic_vector (63 downto 0); -- saida
         zero : out std_logic); -- indica o resultado zero
 end entity;
 
 architecture behavior of ULA is
-    signal op_and , op_or , op_soma ,
-    op_sub , op_nor : std_logic_vector (63 downto 0);
+    signal op_and, op_or, op_soma, op_sub, op_nor: std_logic_vector (63 downto 0);
     
     begin
         -- Operacoes
